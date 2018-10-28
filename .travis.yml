@@ -13,17 +13,22 @@ matrix:
             - g++-7
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+      before_install:
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        - sudo apt-get update -q
+        - sudo apt-get install build-essential libboost-all-dev xsltproc gcc-7 autorevision
+        - eval "${MATRIX_EVAL}"
 
-before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update -q
-  - sudo apt-get install build-essential libboost-all-dev xsltproc gcc-7 autorevision
-  - eval "${MATRIX_EVAL}"
+      compiler:
+        - gcc
 
-compiler:
-  - gcc
+      jobs:
+        include:
+          - script: make -C src && make -C src/examples && make -C src/test && ./src/test/test
+          - script: mkdir build && cd build && cmake .. && make -j4 && ctest -V 
 
-jobs:
-   include:
-      - script: make -C src && make -C src/examples && make -C src/test && ./src/test/test
-      - script: mkdir build && cd build && cmake .. && make -j4 && ctest -V 
+    - language: nix
+      jobs:
+        include:
+          - script: nix-build nixos/default 
+
