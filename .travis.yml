@@ -1,18 +1,22 @@
-language: cpp
 
 sudo: required
 
 matrix:
   include:
-    - os: linux
+    - language: cpp
+
+      os: linux
+
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
           packages:
             - g++-7
+
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
       before_install:
         - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
         - sudo apt-get update -q
@@ -28,8 +32,9 @@ matrix:
           - script: mkdir build && cd build && cmake .. && make -j4 && ctest -V 
 
     - language: nix
+
       jobs:
         include:
-          - before_script : cd nixos
+          - before_script: cd nixos
           - script: nix-build 
 
