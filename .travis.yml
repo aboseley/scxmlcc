@@ -30,5 +30,6 @@ matrix:
     - language: nix
       jobs:
         include:
-          - script: cd nixos && nix-build 
+          - before_script : cd nixos
+          - script: nix-build 
 
