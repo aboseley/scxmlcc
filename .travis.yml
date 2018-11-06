@@ -1,10 +1,8 @@
 
-sudo: required
-
-matrix:
+jobs:
   include:
-    - language: cpp
-      os: linux
+    - os: linux
+      sudo: required
       addons:
         apt:
           sources:
