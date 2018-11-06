@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     owner = "jp-embedded";
     repo  =  "scxmlcc";
     rev = "77dcd3b3c4ef9de8e64f6069117a7fd54687c9d1";
-    sha256 = "14pc68r2iyrvmidiphcvfy0f759iwf41vfzdpgyil1qhfj1kvprq";
+    sha256 = "0301gwvhi3mmpkh47kwdw5sr2xfgb3lf8mz7f9wv9qdz3lfwp7zx";
     fetchSubmodules = true;
     leaveDotGit = true;
   };
